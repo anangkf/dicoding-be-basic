@@ -113,12 +113,14 @@ const deleteNoteByIdHandler = (req, h) => {
   // }
   const isNoteAvailable = checkAvailability(notes, id);
 
+  const [currentNote] = notes.filter((n) => n.id === id);
   notes = notes.filter((n) => n.id !== id);
 
   if (isNoteAvailable) {
     const response = h.response({
       status: 'success',
       message: 'Catatan berhasil dihapus.',
+      data: { ...currentNote },
     });
 
     response.code(200);
