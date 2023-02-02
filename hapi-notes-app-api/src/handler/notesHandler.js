@@ -36,7 +36,7 @@ const addNoteHandler = (req, h) => {
 };
 
 const getAllNotesHandler = () => ({
-  status: 'succes',
+  status: 'success',
   data: {
     notes,
   },
@@ -76,11 +76,13 @@ const editNoteByIdHandler = (req, h) => {
     }
     return note;
   });
+  const [currentNote] = notes.filter((n) => n.id === id);
 
   if (isNoteAvailable) {
     const response = h.response({
       status: 'success',
       message: 'Catatan berhasil diperbarui.',
+      data: { ...currentNote },
     });
 
     response.code(200);
